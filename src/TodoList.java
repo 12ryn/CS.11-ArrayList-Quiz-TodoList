@@ -48,8 +48,24 @@ public class TodoList {
      */
     public String mostUrgent() {
 
-        return null;
+        Task mostUrgent = null;
+        int maxUrgency = Integer.MIN_VALUE;
 
+        for (Task task : tasks) {
+
+            int urgency = task.getUrgency();
+
+            if (urgency > maxUrgency) {
+                maxUrgency = urgency;
+                mostUrgent = task;
+            }
+        }
+
+        if (mostUrgent != null) {
+            return mostUrgent.getName();
+        }
+
+        return null;
     }
 
     /**
@@ -58,7 +74,17 @@ public class TodoList {
      */
     public double averageUrgency() {
 
-        return 0.0;
+        int total = 0;
+        int nTasks = 0;
+
+        for(Task task: tasks){
+
+            total += task.getUrgency();
+            nTasks++;
+
+        }
+
+        return (double) total / nTasks;
 
     }
 
@@ -78,7 +104,17 @@ public class TodoList {
      */
     public String toString() {
 
-        return "";
+        String str = "";
+
+        str += "To-do List of " + owner + "\n";
+
+        for (Task task: tasks){
+
+            str += task.getName() + "\t" + task.getUrgency() + "\n";
+
+        }
+
+        return str;
         
     }
 
